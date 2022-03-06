@@ -1,0 +1,110 @@
+Iske andar tum koi file jo user ko dena chahte ho download ke liye toh usse de do.
+koi bhi confidential file iske andar nahi dalna hai gentlemen;
+DO you agree with me gentlemen;
+
+templates folder ko add krne ke liye setting.py me templates me jakar ye dall do
+'DIRS': [os.path.join(BASE_DIR, "templates")],
+aur static folder ko add krne ke liye 
+STATIC_URL = 'static/' iske andar ye dal do
+STATICFILES_DIRS =[
+    os.path.join(BASE_DIR, "static"),
+]
+
+
+KUCH FILE KE ANDAR JAKAR SETTING ME CHANGES KARNE HAI SO IT WILL HELPFUL FOR US TO DO THESE THINGS
+Templates ke andar saare html file wagara aayenge jo ki bahut hi jayde useful hai 
+aur ha iss file padhe bina start nahi karna dhango warna dikkat me padh sakte ho bhai .
+
+
+TO attach file just move on to views file and make some changes to create and sink some file 
+to use authentication table we must use python manage.py makemigrations 
+python manage.py migrate; usses authentication table [in a new termial under Hello folder ye likho]
+
+2 type of user super users and normal users 
+
+to create super user write this code in above terminal 
+python manage.py createsuperuser
+if you want to change text in file use below code an paste it in urls.py file of project
+admin.site.site_header = "Ayush Admin"
+admin.site.site_title = "Ayush Admin Portal"
+admin.site.index_title = "Welcome to Ayush Admin Portal"
+
+
+base.html ke andar content dalne ke liye syntax copy karo idex.html wale file se aur waha prr content dallo wah chalega website me 
+
+
+To grab any file from static folder for eg image just write /static/file name     (1.jpg)
+ 
+
+ to link css file first put it in static folder and then paste the below code.....
+ <link rel="stylesheet" href="/static/style.css">
+
+
+ Forms ko submit karane ke liye hume kya karna hoga forms ke andar jakar method=post karo and action = /contact karo 
+
+
+
+ forms ko submit karana hai toh jaha se forms ke andar likho  waha prr niche wala code likho
+
+{% csrf_token %}
+
+models ke andar jakar tables bano jo tumhe input me lena hai like this 
+class Contact(models.Model):
+    name = models.CharField(max_length=122)
+    email =models.CharField(max_length=122)
+    opinion=models.TextField(max_length=12)
+    date=models.DateField()
+
+
+uske baad jao admin.py me aur add kar do users ko 
+from home.models import Contact
+
+admin.site.register(Contact)
+
+as it is copy kar dooo gentlemen!!!
+
+uske badd apps.py se app ka name copy karro 
+ HomeConfig
+ and usko lejakaar paste krr do SETTING.py me inside installed apps
+ 'home.apps.HomeConfig'
+ after that run this in terminal niche wala code 
+ python manage.py makemigrations 
+
+ abb now you will be able to se contact in admin page 
+uske baad ye run karo table banne ke liye
+python manage.py migrate 
+
+
+after that go to views.py and write logic as wriiten over there and import certain module 
+
+
+if we want display name of our client jisne register kiya hai tab ye cade likh do models.py ke andar niche wala code
+def __str__(self):
+        return self.name
+    
+
+HOW TO RENDER DATABASE OBJECT USING TERMINAL 
+OPEN NEW TERMINAL IN A HELLO folder
+python manage.py shell 
+upar wala code likh do terminal me 
+from home.models import Contact 
+contact.objects.all()
+contact.objects.all()[0]   this will element at 0 i.e name that has been entered by user
+contact.objects.all()[0].name   ye dega user ka name 
+contact.objects.all()[0].email ye dega user ka email
+contact.objects.filter(name="Ayush")   mujhe woo sare element de do jiske name Ayush hai [serching krr sakte hai];
+contact.objects.filter(name="Ayush",phone="111111") wo do jiska phone number ye hai ;
+
+
+ins = contact.objects.filter(name="Ayush",phone="111111")[0]
+ins.phone = "00000"   ye phone number ko change krr dega database ke andar jiska name Ayush hai
+ins.save()
+
+
+
+contact.objects.all().first()  tab ye first wala name de dega database me se 
+
+
+
+
+settings.py me jakar ALLOWED_HOSTS = [] yaha prr ja krr name likh do kis naam se chalega website
